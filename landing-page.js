@@ -1,22 +1,32 @@
-var CANVAS_SIZE_IN_PIXELS = 300;
+var CANVAS_SIZE_IN_PIXELS = 20;
 
 function init(){
-	draw();
+	insertCells();
+	fillColors();
 }
 
 function random(range){
 	return Math.floor(Math.random()*(range - 1));
 }
 
-function draw(){
-	var canvas = document.getElementById("canvas");
-	var context = canvas.getContext("2d");
-	canvas.height = CANVAS_SIZE_IN_PIXELS;
-	canvas.width = CANVAS_SIZE_IN_PIXELS;
+var table = document.getElementById('table');
+var rows = new Array(CANVAS_SIZE_IN_PIXELS);
+var cells = new Array(CANVAS_SIZE_IN_PIXELS);
+
+function insertCells(){
+	for(i = 0; i < CANVAS_SIZE_IN_PIXELS; i++){
+		rows[i]	= table.insertRow(table.rows.length);
+		cells[i] = new Array(CANVAS_SIZE_IN_PIXELS);
+		for(j = 0; j < CANVAS_SIZE_IN_PIXELS; j++){
+			cells[i][j] = rows[i].insertCell(j);
+		}
+	}
+}
+
+function fillColors(){
 	for(i = 0; i < CANVAS_SIZE_IN_PIXELS; i++){
 		for(j = 0; j < CANVAS_SIZE_IN_PIXELS; j++){
-			context.fillStyle = "rgba("+random(255)+","+random(255)+","+random(255)+",1)";
-			context.fillRect(i,j,1,1);
+			cells[i][j].style.backgroundColor = "rgba("+random(255)+","+random(255)+","+random(255)+",1)";
 		}
 	}
 }
