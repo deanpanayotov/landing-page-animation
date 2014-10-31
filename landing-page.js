@@ -18,7 +18,7 @@ function insertCells(){
 		rows[i]	= table.insertRow(table.rows.length);
 		cells[i] = new Array(CANVAS_SIZE_IN_PIXELS);
 		for(j = 0; j < CANVAS_SIZE_IN_PIXELS; j++){
-			cells[i][j] = rows[i].insertCell(j);
+			cells[i][j] = new Cell(rows[i].insertCell(j));
 		}
 	}
 }
@@ -26,8 +26,18 @@ function insertCells(){
 function fillColors(){
 	for(i = 0; i < CANVAS_SIZE_IN_PIXELS; i++){
 		for(j = 0; j < CANVAS_SIZE_IN_PIXELS; j++){
-			cells[i][j].style.backgroundColor = "rgba("+random(255)+","+random(255)+","+random(255)+",1)";
+			cells[i][j].setBackgroundColor("rgba("+random(255)+","+random(255)+","+random(255)+",1)");
 		}
+	}
+}
+
+function Cell(cell){
+	this.cell = cell;
+	this.active = false;
+	this.backgroundColor = "#FCC347";
+	cell.style.backgroundColor = this.backgroundColor;
+	this.setBackgroundColor = function (color) {
+		cell.style.backgroundColor = color;
 	}
 }
 
