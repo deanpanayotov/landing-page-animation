@@ -1,3 +1,34 @@
+var BASE_COLORS = 
+	new Color(207, 41, 12, 3, 3, 3),
+	new Color(216, 92, 16, 3, 3, 3),
+	new Color(224, 94, 24, 3, 3, 3),
+	new Color(234, 64, 44, 3, 3, 3),
+	new Color(6  , 64, 58, 3, 3, 3),
+	new Color(12 , 93, 60, 3, 3, 3),
+	new Color(16 , 64, 84, 3, 3, 3),
+	new Color(15 , 64, 88, 3, 3, 3),
+];
+
+function Color(h, s, l, hvar, svar, lvar){
+	this.h = h;
+	this.s = s;
+	this.l = l;
+	this.hvar = hvar;
+	this.svar = svar;
+	this.lvar = lvar;
+
+	this.getColor = function(){
+		return "hsl("+
+			(h+random(hvar*-1,hvar))+
+			","+ 
+			(s+random(svar*-1,svar))+
+			"%,"+
+			(l+random(lvar*-1,lvar))+
+			"%)";
+	}
+};
+
+
 var CANVAS_SIZE_IN_PIXELS = 20;
 
 function init(){
@@ -5,8 +36,21 @@ function init(){
 	fillColors();
 }
 
+function fiftyfifty() {
+    return (Math.round(Math.random()) === 0);
+}
+
 function random(range){
 	return Math.floor(Math.random()*(range - 1));
+}
+
+function random(min, max){
+	if(min > max){
+		var t = max;
+		max = min;
+		min = t;
+	}
+	return Math.floor(Math.random() * (max - min) + min);
 }
 
 var table = document.getElementById('table');
